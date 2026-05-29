@@ -12,9 +12,10 @@ const props = defineProps({
     },
     contentClasses: {
         type: String,
-        default: 'py-1 bg-white',
+        default: 'rounded-2xl border border-white/10 bg-slate-900/95 py-2 text-slate-100 backdrop-blur-xl',
     },
 });
+const open = ref(false);
 
 const closeOnEscape = (e) => {
     if (open.value && e.key === 'Escape') {
@@ -25,23 +26,21 @@ const closeOnEscape = (e) => {
 onMounted(() => document.addEventListener('keydown', closeOnEscape));
 onUnmounted(() => document.removeEventListener('keydown', closeOnEscape));
 
-const widthClass = computed(() => {
-    return {
-        48: 'w-48',
-    }[props.width.toString()];
-});
+const widthClass = computed(() => ({
+    48: 'w-48',
+}[props.width.toString()]));
 
 const alignmentClasses = computed(() => {
     if (props.align === 'left') {
         return 'ltr:origin-top-left rtl:origin-top-right start-0';
-    } else if (props.align === 'right') {
-        return 'ltr:origin-top-right rtl:origin-top-left end-0';
-    } else {
-        return 'origin-top';
     }
-});
 
-const open = ref(false);
+    if (props.align === 'right') {
+        return 'ltr:origin-top-right rtl:origin-top-left end-0';
+    }
+
+    return 'origin-top';
+});
 </script>
 
 <template>
@@ -67,13 +66,13 @@ const open = ref(false);
         >
             <div
                 v-show="open"
-                class="absolute z-50 mt-2 rounded-md shadow-lg"
+                class="absolute z-[70] mt-2 rounded-2xl shadow-2xl shadow-black/30"
                 :class="[widthClass, alignmentClasses]"
                 style="display: none"
                 @click="open = false"
             >
                 <div
-                    class="rounded-md ring-1 ring-black ring-opacity-5"
+                    class="relative z-[70] ring-1 ring-white/10"
                     :class="contentClasses"
                 >
                     <slot name="content" />
