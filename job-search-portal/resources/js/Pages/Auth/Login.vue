@@ -1,11 +1,11 @@
 <script setup>
-import Checkbox from '@/Components/Checkbox.vue';
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 defineProps({
     canResetPassword: {
@@ -31,69 +31,86 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Log in" />
+        <Head :title="t('auth.login.headTitle')" />
 
-        <div v-if="status" class="mb-4 text-sm font-medium text-green-600">
+        <div class="mb-8 space-y-2">
+            <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300/80">
+                {{ t('auth.login.kicker') }}
+            </p>
+            <h2 class="text-3xl font-semibold text-white">{{ t('auth.login.title') }}</h2>
+            <p class="text-sm leading-6 text-slate-300">
+                {{ t('auth.login.copy') }}
+            </p>
+        </div>
+
+        <div v-if="status" class="mb-6 rounded-2xl border border-emerald-400/20 bg-emerald-400/10 px-4 py-3 text-sm text-emerald-200">
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
+        <form @submit.prevent="submit" class="space-y-5">
+            <div class="space-y-2">
+                <label for="email" class="text-sm font-medium text-slate-300">{{ t('auth.login.email') }}</label>
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="block w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white shadow-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-cyan-400/30"
                     v-model="form.email"
                     required
                     autofocus
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+            <div class="space-y-2">
+                <label for="password" class="text-sm font-medium text-slate-300">{{ t('auth.login.password') }}</label>
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white shadow-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-cyan-400/30"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError :message="form.errors.password" />
             </div>
 
-            <div class="mt-4 block">
-                <label class="flex items-center">
-                    <Checkbox name="remember" v-model:checked="form.remember" />
-                    <span class="ms-2 text-sm text-gray-600"
-                        >Remember me</span
-                    >
+            <div class="flex items-center justify-between gap-4">
+                <label class="flex items-center gap-3 text-sm text-slate-300">
+                    <input
+                        name="remember"
+                        type="checkbox"
+                        v-model="form.remember"
+                        class="h-4 w-4 rounded border-white/20 bg-slate-900 text-cyan-400 focus:ring-cyan-400/30"
+                    />
+                    <span>{{ t('auth.login.remember') }}</span>
                 </label>
-            </div>
 
-            <div class="mt-4 flex items-center justify-end">
                 <Link
                     v-if="canResetPassword"
                     :href="route('password.request')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    class="text-sm text-cyan-300 transition hover:text-cyan-200"
                 >
-                    Forgot your password?
+                    {{ t('auth.login.forgot') }}
+                </Link>
+            </div>
+
+            <div class="flex items-center justify-between gap-4 pt-2">
+                <Link :href="route('register')" class="text-sm text-slate-300 transition hover:text-white">
+                    {{ t('auth.login.registerLink') }}
                 </Link>
 
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
+                <button
+                    type="submit"
                     :disabled="form.processing"
+                    class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                    Log in
-                </PrimaryButton>
+                    {{ t('auth.login.submit') }}
+                </button>
             </div>
         </form>
     </GuestLayout>

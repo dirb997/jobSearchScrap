@@ -1,10 +1,11 @@
 <script setup>
-import GuestLayout from '@/Layouts/GuestLayout.vue';
 import InputError from '@/Components/InputError.vue';
-import InputLabel from '@/Components/InputLabel.vue';
-import PrimaryButton from '@/Components/PrimaryButton.vue';
+import GuestLayout from '@/Layouts/GuestLayout.vue';
 import TextInput from '@/Components/TextInput.vue';
 import { Head, Link, useForm } from '@inertiajs/vue3';
+import { useI18n } from 'vue-i18n';
+
+const { t } = useI18n();
 
 const form = useForm({
     name: '',
@@ -22,91 +23,92 @@ const submit = () => {
 
 <template>
     <GuestLayout>
-        <Head title="Register" />
+        <Head :title="t('auth.register.headTitle')" />
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
+        <div class="mb-8 space-y-2">
+            <p class="text-sm font-medium uppercase tracking-[0.25em] text-cyan-300/80">
+                {{ t('auth.register.kicker') }}
+            </p>
+            <h2 class="text-3xl font-semibold text-white">{{ t('auth.register.title') }}</h2>
+            <p class="text-sm leading-6 text-slate-300">
+                {{ t('auth.register.copy') }}
+            </p>
+        </div>
+
+        <form @submit.prevent="submit" class="space-y-5">
+            <div class="space-y-2">
+                <label for="name" class="text-sm font-medium text-slate-300">{{ t('auth.register.name') }}</label>
 
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white shadow-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-cyan-400/30"
                     v-model="form.name"
                     required
                     autofocus
                     autocomplete="name"
                 />
 
-                <InputError class="mt-2" :message="form.errors.name" />
+                <InputError :message="form.errors.name" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+            <div class="space-y-2">
+                <label for="email" class="text-sm font-medium text-slate-300">{{ t('auth.register.email') }}</label>
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="block w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white shadow-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-cyan-400/30"
                     v-model="form.email"
                     required
                     autocomplete="username"
                 />
 
-                <InputError class="mt-2" :message="form.errors.email" />
+                <InputError :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+            <div class="space-y-2">
+                <label for="password" class="text-sm font-medium text-slate-300">{{ t('auth.register.password') }}</label>
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white shadow-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-cyan-400/30"
                     v-model="form.password"
                     required
                     autocomplete="new-password"
                 />
 
-                <InputError class="mt-2" :message="form.errors.password" />
+                <InputError :message="form.errors.password" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel
-                    for="password_confirmation"
-                    value="Confirm Password"
-                />
+            <div class="space-y-2">
+                <label for="password_confirmation" class="text-sm font-medium text-slate-300">{{ t('auth.register.passwordConfirmation') }}</label>
 
                 <TextInput
                     id="password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-3 text-white shadow-none placeholder:text-slate-500 focus:border-cyan-400 focus:ring-cyan-400/30"
                     v-model="form.password_confirmation"
                     required
                     autocomplete="new-password"
                 />
 
-                <InputError
-                    class="mt-2"
-                    :message="form.errors.password_confirmation"
-                />
+                <InputError :message="form.errors.password_confirmation" />
             </div>
 
-            <div class="mt-4 flex items-center justify-end">
-                <Link
-                    :href="route('login')"
-                    class="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-                >
-                    Already registered?
+            <div class="flex items-center justify-between gap-4 pt-2">
+                <Link :href="route('login')" class="text-sm text-slate-300 transition hover:text-white">
+                    {{ t('auth.register.loginLink') }}
                 </Link>
 
-                <PrimaryButton
-                    class="ms-4"
-                    :class="{ 'opacity-25': form.processing }"
+                <button
+                    type="submit"
                     :disabled="form.processing"
+                    class="inline-flex items-center justify-center rounded-full bg-cyan-400 px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-300 disabled:cursor-not-allowed disabled:opacity-50"
                 >
-                    Register
-                </PrimaryButton>
+                    {{ t('auth.register.submit') }}
+                </button>
             </div>
         </form>
     </GuestLayout>

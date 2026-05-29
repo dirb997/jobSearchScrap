@@ -66,4 +66,52 @@ export default {
             meta: 'On-site · Junior · Published today',
         },
     },
+    auth: {
+        layout: {
+            kicker: 'Build your search workflow',
+            headline: 'Find the right job faster.',
+            copy: 'Save searches, compare companies, and keep your shortlist organized in one place.',
+            cards: {
+                saved: {
+                    title: 'Saved searches',
+                    value: 'Alerts',
+                    copy: 'Keep track of filters that matter to you.',
+                },
+                tracking: {
+                    title: 'Job tracking',
+                    value: 'Insights',
+                    copy: 'Review companies, locations, and conditions quickly.',
+                },
+                stack: {
+                    title: 'Portal stack',
+                    value: 'Laravel + Vue',
+                    copy: 'A clean app shell for search and discovery.',
+                },
+            },
+        },
+        login: {
+            headTitle: 'Log in',
+            kicker: 'Welcome back',
+            title: 'Sign in to continue',
+            copy: 'Pick up your saved searches and job alerts where you left off.',
+            email: 'Email',
+            password: 'Password',
+            remember: 'Remember me',
+            forgot: 'Forgot your password?',
+            registerLink: 'Need an account?',
+            submit: 'Log in',
+        },
+        register: {
+            headTitle: 'Register',
+            kicker: 'Create your account',
+            title: 'Start saving jobs faster',
+            copy: 'Create an account to save searches, track companies, and keep your shortlist organized.',
+            name: 'Name',
+            email: 'Email',
+            password: 'Password',
+            passwordConfirmation: 'Confirm password',
+            loginLink: 'Already registered?',
+            submit: 'Register',
+        },
+    },
 };

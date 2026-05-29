@@ -66,4 +66,52 @@ export default {
             meta: 'Presencial · Junior · Publicado hoy',
         },
     },
+    auth: {
+        layout: {
+            kicker: 'Construye tu flujo de búsqueda',
+            headline: 'Encuentra el empleo correcto más rápido.',
+            copy: 'Guarda búsquedas, compara empresas y organiza tu shortlist en un solo lugar.',
+            cards: {
+                saved: {
+                    title: 'Búsquedas guardadas',
+                    value: 'Alertas',
+                    copy: 'Da seguimiento a los filtros que más te importan.',
+                },
+                tracking: {
+                    title: 'Seguimiento',
+                    value: 'Análisis',
+                    copy: 'Revisa empresas, ubicaciones y condiciones rápidamente.',
+                },
+                stack: {
+                    title: 'Stack del portal',
+                    value: 'Laravel + Vue',
+                    copy: 'Una base limpia para buscar y descubrir vacantes.',
+                },
+            },
+        },
+        login: {
+            headTitle: 'Entrar',
+            kicker: 'Bienvenido de nuevo',
+            title: 'Inicia sesión para continuar',
+            copy: 'Retoma tus búsquedas guardadas y alertas de empleo donde las dejaste.',
+            email: 'Correo electrónico',
+            password: 'Contraseña',
+            remember: 'Recordarme',
+            forgot: '¿Olvidaste tu contraseña?',
+            registerLink: '¿Necesitas una cuenta?',
+            submit: 'Entrar',
+        },
+        register: {
+            headTitle: 'Registrarse',
+            kicker: 'Crea tu cuenta',
+            title: 'Empieza a guardar empleos más rápido',
+            copy: 'Crea una cuenta para guardar búsquedas, seguir empresas y organizar tu shortlist.',
+            name: 'Nombre',
+            email: 'Correo electrónico',
+            password: 'Contraseña',
+            passwordConfirmation: 'Confirmar contraseña',
+            loginLink: '¿Ya estás registrado?',
+            submit: 'Registrarse',
+        },
+    },
 };
